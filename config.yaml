@@ -1,0 +1,47 @@
+# Bütün ayarlar burada. Kod içine sabit değer yazmayın, buradan okuyun.
+
+veri:
+  ham_klasor: data/raw
+  islenmis_klasor: data/processed
+  medium: WPP2024_Demographic_Indicators_Medium_csv.gz
+  diger_varyantlar: WPP2024_Demographic_Indicators_OtherVariants_csv.gz
+  notlar: WPP2024_Demographic_Indicators_notes.csv
+
+donem:
+  projeksiyon_baslangic: 2024   # bu yıl ve sonrası BM orta senaryo projeksiyonu
+
+analiz:
+  referans_yil: 2023            # "bugün" kabul edilen son tahmin yılı
+  ornek_ulkeler: [Türkiye, Nigeria, Japan, India]
+
+grafik:
+  klasor: reports/figures
+  dpi: 150
+
+# Üye 3 — Bileşik profil indeksi. Bunlar EKİBİN savunması gereken seçimler (yönerge soru 5).
+#   yön: +1 = yüksek değer indeksi artırır, -1 = düşürür
+#   Buradaki örnek indeks: "demografik gençlik/dinamizm"
+kompozit_indeks:
+  yil: 2023
+  gostergeler:
+    TFR: 1
+    PopGrowthRate: 1
+    CNMR: 1
+    MedianAgePop: -1
+    LE65: -1
+
+# Üye 3 — Yörünge kümeleme (yönerge soru 6: seviyeye değil, hareketine göre gruplama)
+kumeleme:
+  gostergeler: [TFR, LEx, MedianAgePop, CNMR]
+  baslangic: 1950
+  bitis: 2023
+  k: 5
+  yalnizca_degisim: true        # true: her ülkenin kendi başlangıcına göre değişim (şekil)
+  seed: 42
+
+# Üye 4 — OtherVariants
+belirsizlik:
+  hedef_yil: 2100
+  yuksek: High
+  dusuk: Low
+  sabit_dogurganlik: Constant fertility
